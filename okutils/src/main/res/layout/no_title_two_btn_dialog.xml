@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/shape_rect_with_arc_small_white"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:gravity="left"
+            android:maxLength="200"
+            android:hint="请输入备注原因（选填200字以内）"
+            android:background="@drawable/rectangle_bg_shape"
+            android:lineSpacingExtra="5sp"
+            android:layout_marginTop="50dp"
+            android:textColor="@color/text_important_color"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/text_divide_color" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvCancel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="取消"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/lineDivide"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/text_divide_color" />
+
+            <TextView
+                android:id="@+id/tvConfirm"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_rightbtn_dialog"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="#1eabe1"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
