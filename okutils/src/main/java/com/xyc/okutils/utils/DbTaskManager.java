@@ -1,4 +1,4 @@
-package com.xyc.okutils;
+package com.xyc.okutils.utils;
 
 import android.os.Handler;
 import android.os.HandlerThread;

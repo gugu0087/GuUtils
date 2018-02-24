@@ -1,4 +1,4 @@
-package com.xyc.okutils;
+package com.xyc.okutils.utils;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.xyc.okutils.R;
 import com.xyc.okutils.delegate.IConfirmClickListener;
 import com.xyc.okutils.delegate.IGetSelectHourListener;
 

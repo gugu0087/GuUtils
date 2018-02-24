@@ -1,8 +1,11 @@
-package com.xyc.okutils;
+package com.xyc.okutils.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+
+import com.xyc.okutils.base.ApplicationHolder;
+
 /**
  * Created by hasee on 2017/12/25.
  */

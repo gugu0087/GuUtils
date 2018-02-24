@@ -3,6 +3,9 @@ package com.xyc.okutils;
 
 import android.app.Activity;
 import android.app.Application;
+
+import com.xyc.okutils.base.ApplicationHolder;
+
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 

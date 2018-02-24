@@ -1,8 +1,11 @@
-package com.xyc.okutils;
+package com.xyc.okutils.utils;
 
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
+
+import com.xyc.okutils.base.ApplicationHolder;
+
 import java.io.File;
 
 /**

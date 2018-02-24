@@ -1,4 +1,4 @@
-package com.xyc.okutils;
+package com.xyc.okutils.utils;
 
 import android.content.Context;
 import android.util.DisplayMetrics;

@@ -1,10 +1,12 @@
-package com.xyc.okutils;
+package com.xyc.okutils.utils;
 
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.xyc.okutils.base.ApplicationHolder;
 
 /**
  * Created by hasee on 2018/2/10.

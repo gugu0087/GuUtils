@@ -1,4 +1,4 @@
-package com.xyc.okutils;
+package com.xyc.okutils.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -8,6 +8,8 @@ import android.support.annotation.ColorRes;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.xyc.okutils.base.ApplicationHolder;
 
 /**
  * Created by hasee on 2017/12/28.

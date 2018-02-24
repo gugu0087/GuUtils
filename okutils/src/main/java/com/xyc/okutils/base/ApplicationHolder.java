@@ -1,4 +1,4 @@
-package com.xyc.okutils;
+package com.xyc.okutils.base;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.util.Log;
 
+import com.xyc.okutils.utils.DbTaskManager;
 import com.xyc.okutils.model.VersionModel;
 
 /**
