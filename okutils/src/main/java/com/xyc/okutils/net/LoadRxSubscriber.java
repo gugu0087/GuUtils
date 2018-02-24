@@ -1,7 +1,6 @@
 package com.xyc.okutils.net;
 
 
-import com.xyc.okutils.utils.NetLogManager;
 
 /**
  * Created by hasee on 2017/12/16.
