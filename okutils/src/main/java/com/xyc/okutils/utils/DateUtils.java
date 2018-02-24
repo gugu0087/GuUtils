@@ -15,7 +15,9 @@ import java.util.Locale;
 public class DateUtils {
 
     private static DateUtils instance = null;
-    private String mFormatStr = "yyyy/MM/dd HH:mm:ss";
+    public static final String MINUTE_FORMAT = "yyyy/MM/dd HH:mm:ss";
+    public static final String DAY_FORMAT = "yyyy/MM/dd";
+    private String mFormatStr = MINUTE_FORMAT;
 
     private DateUtils() {
 
@@ -38,6 +40,9 @@ public class DateUtils {
      * @param formatStr
      */
     public void setFormatStr(String formatStr) {
+        if (formatStr == null) {
+            mFormatStr = "yyyy/MM/dd HH:mm:ss";
+        }
         mFormatStr = formatStr;
     }
 
@@ -47,11 +52,11 @@ public class DateUtils {
      * @param time
      * @return
      */
-    public String getLongToString(long time) {
+    public String getLongToString(long time,String formatStr) {
         if (time == 0) {
             time = getSystemLongTime();
         }
-        SimpleDateFormat format = new SimpleDateFormat(mFormatStr, Locale.CHINA);
+        SimpleDateFormat format = new SimpleDateFormat(formatStr, Locale.CHINA);
         Date date = new Date(time);
         return format.format(date);
     }
@@ -62,8 +67,8 @@ public class DateUtils {
      * @param strTime
      * @return
      */
-    public Date getStringToDate(String strTime) {
-        SimpleDateFormat formatter = new SimpleDateFormat(mFormatStr, Locale.CHINA);
+    public Date getStringToDate(String strTime,String formatStr) {
+        SimpleDateFormat formatter = new SimpleDateFormat(formatStr, Locale.CHINA);
         Date date = null;
         try {
             date = formatter.parse(strTime);
@@ -92,9 +97,9 @@ public class DateUtils {
      * @param time
      * @return
      */
-    public Date getLongToDate(long time) {
-        String longToString = getLongToString(time);
-        Date stringToDate = getStringToDate(longToString);
+    public Date getLongToDate(long time,String formatStr) {
+        String longToString = getLongToString(time,formatStr);
+        Date stringToDate = getStringToDate(longToString,formatStr);
         return stringToDate;
     }
 
@@ -197,9 +202,9 @@ public class DateUtils {
      * @param ts2 时间戳2
      * @return
      */
-    public  int getCaculate2Days(long ts1, long ts2) {
-        Date firstDate = getLongToDate(ts1);
-        Date secondDate = getLongToDate(ts2);
+    public int getCaculate2Days(long ts1, long ts2) {
+        Date firstDate = getLongToDate(ts1,mFormatStr);
+        Date secondDate = getLongToDate(ts2,mFormatStr);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(firstDate);
         int dayNum1 = calendar.get(Calendar.DAY_OF_YEAR);

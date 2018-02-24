@@ -20,7 +20,7 @@ public class FileUtils {
 
     }
 
-    public static FileUtils getInstance(Context context) {
+    public static FileUtils getInstance() {
         if (instance == null) {
             instance = new FileUtils();
         }
