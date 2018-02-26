@@ -30,6 +30,7 @@ public class NetLogManager {
         return instance;
     }
 
+
     public void logNetResponse(final NetLogModel netLogModel) {
         ApplicationHolder.getInstance().getBackgroundHandler().post(new Runnable() {
             @Override
