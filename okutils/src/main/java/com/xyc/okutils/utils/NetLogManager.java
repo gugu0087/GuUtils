@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.xyc.okutils.base.ApplicationHolder;
 import com.xyc.okutils.base.ComParams;
+import com.xyc.okutils.model.NetLogModel;
 
 import java.io.File;
 import java.io.RandomAccessFile;
@@ -29,17 +30,34 @@ public class NetLogManager {
         return instance;
     }
 
-    public void logNetResponse(final String request, final String response) {
+    public void logNetResponse(final NetLogModel netLogModel) {
         ApplicationHolder.getInstance().getBackgroundHandler().post(new Runnable() {
             @Override
             public void run() {
 
-                String currentTime = DateUtils.getInstance().getLongToString(DateUtils.getInstance().getSystemLongTime(), DateUtils.DAY_FORMAT);
-                String formatSystemTime = DateUtils.getInstance().getLongToString(DateUtils.getInstance().getSystemLongTime(), DateUtils.MINUTE_FORMAT);
+                String currentTime = DateUtils.getInstance().getLongToString(DateUtils.getInstance().getSystemLongTime(), DateUtils.DATE_FORMAT_DAY2);
+                String formatSystemTime = DateUtils.getInstance().getLongToString(DateUtils.getInstance().getSystemLongTime(), DateUtils.DATE_FORMAT_YEAR2);
 
                 String filePath = FileUtils.getInstance().getFilePath(ComParams.LOG_EXTRA_PATH);
                 String fileName = currentTime + ".html";//log日志名，使用时间命名，保证不重复
-                String log = "\n\n" + "--request = " + request + "=-----" + formatSystemTime + "\n" + "response = " + response;
+                String log = "time = " + formatSystemTime + "\n" + "netLogModel=" + netLogModel.toString() + "\n\n";
+                writeTxtToFile(log, filePath, fileName);
+            }
+        });
+
+    }
+
+    public void logdResponse(final String request, final String response) {
+        ApplicationHolder.getInstance().getBackgroundHandler().post(new Runnable() {
+            @Override
+            public void run() {
+
+                String currentTime = DateUtils.getInstance().getLongToString(DateUtils.getInstance().getSystemLongTime(), DateUtils.DATE_FORMAT_DAY2);
+                String formatSystemTime = DateUtils.getInstance().getLongToString(DateUtils.getInstance().getSystemLongTime(), DateUtils.DATE_FORMAT_YEAR2);
+
+                String filePath = FileUtils.getInstance().getFilePath(ComParams.LOG_EXTRA_PATH);
+                String fileName = currentTime + ".html";//log日志名，使用时间命名，保证不重复
+                String log = "time=" + formatSystemTime + "\n" + "request_url=" + request + "\n" + "response = " + response + "\n\n";
                 writeTxtToFile(log, filePath, fileName);
             }
         });
@@ -76,12 +94,12 @@ public class NetLogManager {
         ApplicationHolder.getInstance().getBackgroundHandler().post(new Runnable() {
             @Override
             public void run() {
-                String currentTime = DateUtils.getInstance().getLongToString(DateUtils.getInstance().getSystemLongTime(), DateUtils.DAY_FORMAT);
-                String formatSystemTime = DateUtils.getInstance().getLongToString(DateUtils.getInstance().getSystemLongTime(), DateUtils.MINUTE_FORMAT);
+                String currentTime = DateUtils.getInstance().getLongToString(DateUtils.getInstance().getSystemLongTime(), DateUtils.DATE_FORMAT_DAY2);
+                String formatSystemTime = DateUtils.getInstance().getLongToString(DateUtils.getInstance().getSystemLongTime(), DateUtils.DATE_FORMAT_YEAR2);
 
                 String filePath = FileUtils.getInstance().getFilePath(ComParams.LOG_EXTRA_PATH);
                 String fileName = currentTime + ".html";//log日志名，使用时间命名，保证不重复
-                String log = "\n\n" + url + "--code = " + code + "=-----" + formatSystemTime + "\n" + "response = " + response;
+                String log = "time=" + formatSystemTime + "\n" + "request_url=" + url + "\n" + "response_code = " + code + "\n" + "response = " + response + "\n\n";
                 writeTxtToFile(log, filePath, fileName);
             }
         });

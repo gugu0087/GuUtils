@@ -17,6 +17,8 @@ public class DateUtils {
     private static DateUtils instance = null;
     public static final String MINUTE_FORMAT = "yyyy/MM/dd HH:mm:ss";
     public static final String DAY_FORMAT = "yyyy/MM/dd";
+    public static final String DATE_FORMAT_YEAR2 = "yyyy-MM-dd HH:mm:ss";
+    public static final String DATE_FORMAT_DAY2 = "yyyy-MM-dd";
     private String mFormatStr = MINUTE_FORMAT;
 
     private DateUtils() {
