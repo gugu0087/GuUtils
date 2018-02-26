@@ -76,12 +76,18 @@ public class NetLogModel {
         this.content = content;
     }
 
-    @Override
-    public String toString() {
+    public String toRequestString() {
         return "NetLogModel{" +
                 "method='" + method + '\n' +
-                ", headers='" + headers +  '\n' +
-                ", url='" + url +  '\n' +
+                ", headers='" + headers + '\n' +
+                ", url='" + url + '\n' +
+                ", code=" + code + '\n' +
+                '}';
+    }
+
+    public String toResponseString() {
+        return "NetLogModel{" +
+                ", url='" + url + '\n' +
                 ", code=" + code + '\n' +
                 ", contentType='" + contentType + '\n' +
                 ", content='" + content + '\n' +

@@ -31,7 +31,7 @@ public class NetLogManager {
     }
 
 
-    public void logNetResponse(final NetLogModel netLogModel) {
+    public void logNetResponse(final NetLogModel netLogModel, final boolean isResponseLog) {
         ApplicationHolder.getInstance().getBackgroundHandler().post(new Runnable() {
             @Override
             public void run() {
@@ -41,7 +41,12 @@ public class NetLogManager {
 
                 String filePath = FileUtils.getInstance().getFilePath(ComParams.LOG_EXTRA_PATH);
                 String fileName = currentTime + ".html";//log日志名，使用时间命名，保证不重复
-                String log = "time = " + formatSystemTime + "\n" + "netLogModel=" + netLogModel.toString() + "\n\n";
+                String log = "";
+                if (isResponseLog) {
+                    log = "log_time = " + formatSystemTime + "\n" + "netLogModel=" + netLogModel.toResponseString() + "\n\n";
+                } else {
+                    log = "log_time = " + formatSystemTime + "\n" + "netLogModel=" + netLogModel.toRequestString() + "\n\n";
+                }
                 writeTxtToFile(log, filePath, fileName);
             }
         });
@@ -75,7 +80,7 @@ public class NetLogManager {
         // 每次写入时，都换行写
         String strContent = strcontent + "\r\n";
         try {
-            File file = new File(strFilePath, fileName);
+            File file = new File(filePath, fileName);
             if (!file.exists()) {
                 Log.d("TestFile", "Create the file:" + strFilePath);
                 file.getParentFile().mkdirs();
@@ -101,6 +106,7 @@ public class NetLogManager {
                 String filePath = FileUtils.getInstance().getFilePath(ComParams.LOG_EXTRA_PATH);
                 String fileName = currentTime + ".html";//log日志名，使用时间命名，保证不重复
                 String log = "time=" + formatSystemTime + "\n" + "request_url=" + url + "\n" + "response_code = " + code + "\n" + "response = " + response + "\n\n";
+
                 writeTxtToFile(log, filePath, fileName);
             }
         });

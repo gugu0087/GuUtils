@@ -35,7 +35,7 @@ public class FileUtils {
         try {
             file = new File(filePath, fileName);
             if (!file.exists()) {
-                file.mkdir();
+                file.createNewFile();
             }
         } catch (Exception e) {
             e.printStackTrace();
