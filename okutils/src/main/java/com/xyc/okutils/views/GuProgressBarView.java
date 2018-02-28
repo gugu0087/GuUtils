@@ -3,6 +3,7 @@ package com.xyc.okutils.views;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -56,9 +57,29 @@ public class GuProgressBarView extends RelativeLayout {
     public void setProgressbarHeight(int height) {
         RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         p.height = UIUtils.dipToPx(mContext, height);
-        if(progressBar!=null){
+        if (progressBar != null) {
             progressBar.setLayoutParams(p);
         }
+    }
+
+    /**
+     * 设置进度条数值的颜色
+     *
+     * @param colorId
+     */
+    public void setCurrentTextColor(int colorId) {
+        tvCurrentTopTip.setTextColor(mContext.getResources().getColor(colorId));
+        tvCurrentCenterTip.setTextColor(mContext.getResources().getColor(colorId));
+    }
+
+    /**
+     * 设置进度条数值的大小
+     *
+     * @param textSize
+     */
+    public void setCurrentTextSize(int textSize) {
+        tvCurrentTopTip.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        tvCurrentCenterTip.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
     }
 
     /**

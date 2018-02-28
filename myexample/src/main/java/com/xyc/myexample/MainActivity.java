@@ -19,9 +19,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         progressView = (GuProgressBarView) findViewById(R.id.guProgressBar);
       //  progressView.setCurrentProDrawable(R.drawable.progress_view);
-        progressView.setProgressbarHeight(40);
-        progressView.setCurrentText("60%");
-        progressView.setCurrentTextCenter(true);
+        progressView.setProgressbarHeight(25);
+
+        //progressView.setCurrentText("60%");
+        progressView.setCurrentTextColor(R.color.colorAccent);
+        progressView.setCurrentTextSize(18);
+
         progressView.setPercent(0.60);
     }
 

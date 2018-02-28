@@ -2,6 +2,7 @@ package com.xyc.okutils.utils;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.WindowManager;
 
 import java.text.DecimalFormat;
@@ -75,6 +76,7 @@ public class UIUtils {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (sp * fontScale + 0.5f);
     }
+
 
     public static String getChangeContent(String content, String tips) {
         if (content == null || content.isEmpty()) {
