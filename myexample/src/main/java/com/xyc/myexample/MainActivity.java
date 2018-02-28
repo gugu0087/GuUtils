@@ -7,14 +7,22 @@ import android.view.View;
 import com.xyc.okutils.manager.ThreadPoolManager;
 import com.xyc.okutils.model.NetLogModel;
 import com.xyc.okutils.utils.NetLogManager;
+import com.xyc.okutils.views.GuProgressBarView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private GuProgressBarView progressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        progressView = (GuProgressBarView) findViewById(R.id.guProgressBar);
+      //  progressView.setCurrentProDrawable(R.drawable.progress_view);
+        progressView.setCurrentText("60%");
+        progressView.setPercent(0.60);
     }
+
     public void tvClick(View view){
         NetLogModel netLogModel = new NetLogModel();
         netLogModel.setCode(200);
