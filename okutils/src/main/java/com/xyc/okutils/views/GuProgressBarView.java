@@ -4,11 +4,14 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.xyc.okutils.R;
+import com.xyc.okutils.utils.UIUtils;
 
 /**
  * Created by lifesensexu on 16/8/5.
@@ -48,6 +51,14 @@ public class GuProgressBarView extends RelativeLayout {
         tvCurrentTopTip = (TextView) findViewById((R.id.tvCurrentTopTip));
         tvCurrentCenterTip = (TextView) findViewById((R.id.tvCurrentCenterTip));
         progressBar = ((ProgressBar) findViewById(R.id.progressBar_detail));
+    }
+
+    public void setProgressbarHeight(int height) {
+        RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        p.height = UIUtils.dipToPx(mContext, height);
+        if(progressBar!=null){
+            progressBar.setLayoutParams(p);
+        }
     }
 
     /**
