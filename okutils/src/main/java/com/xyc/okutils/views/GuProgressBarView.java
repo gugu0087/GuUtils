@@ -2,6 +2,7 @@ package com.xyc.okutils.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -20,6 +21,7 @@ public class GuProgressBarView extends RelativeLayout {
     private TextView tvCurrentCenterTip;
     private boolean isShowCenter = false;
     private boolean isShowTip = true;
+    private String textTip;
 
     public GuProgressBarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -54,6 +56,9 @@ public class GuProgressBarView extends RelativeLayout {
      */
     public void setCurrentTextCenter(boolean isShowCenter) {
         this.isShowCenter = isShowCenter;
+        if (textTip != null) {
+            setCurrentText(textTip);
+        }
         if (isShowCenter) {
             tvCurrentCenterTip.setVisibility(VISIBLE);
             tvCurrentTopTip.setVisibility(GONE);
@@ -86,6 +91,7 @@ public class GuProgressBarView extends RelativeLayout {
     }
 
     public void setCurrentText(CharSequence text) {
+        textTip = text.toString();
         if (isShowCenter) {
             tvCurrentCenterTip.setText(text);
             tvCurrentCenterTip.setVisibility(VISIBLE);
@@ -127,7 +133,13 @@ public class GuProgressBarView extends RelativeLayout {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int textWidth = tvCurrentTopTip.getMeasuredWidth();
+        Log.d("xyc", "onMeasure: isShowCenter=" + isShowCenter);
+        int textWidth;
+        if (isShowCenter) {
+            textWidth = tvCurrentCenterTip.getMeasuredWidth();
+        } else {
+            textWidth = tvCurrentTopTip.getMeasuredWidth();
+        }
         int fullWidth = getMeasuredWidth();
         int progressWidthMeasured = MeasureSpec.makeMeasureSpec(fullWidth - textWidth, MeasureSpec.EXACTLY);
         int progressHeightMeasured = MeasureSpec.makeMeasureSpec(progressBar.getMeasuredHeight(), MeasureSpec.EXACTLY);
@@ -137,17 +149,32 @@ public class GuProgressBarView extends RelativeLayout {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
-        int textWidth = tvCurrentTopTip.getMeasuredWidth();
+        int textWidth;
+        final int oldTop;
+        final int oldBottom;
+        if (isShowCenter) {
+            textWidth = tvCurrentCenterTip.getMeasuredWidth();
+            oldTop = tvCurrentCenterTip.getTop();
+            oldBottom = tvCurrentCenterTip.getBottom();
+        } else {
+            textWidth = tvCurrentTopTip.getMeasuredWidth();
+            oldTop = tvCurrentTopTip.getTop();
+            oldBottom = tvCurrentTopTip.getBottom();
+        }
         int progressBarLeft = textWidth / 2;
         int progressBarRight = progressBarLeft + progressBar.getMeasuredWidth();
         progressBar.layout(progressBarLeft, progressBar.getTop(), progressBarRight, progressBar.getBottom());
-        final int oldTop = tvCurrentTopTip.getTop();
-        final int oldBottom = tvCurrentTopTip.getBottom();
+
         final int width = progressBar.getMeasuredWidth();
         int percentWidth = ((int) (width * percent));
         int textLeft = percentWidth;
-        int textRight = textLeft + tvCurrentTopTip.getMeasuredWidth();
-        tvCurrentTopTip.layout(textLeft, oldTop, textRight, oldBottom);
 
+        if (isShowCenter) {
+            int textRight = textLeft + tvCurrentCenterTip.getMeasuredWidth();
+            tvCurrentCenterTip.layout(textLeft, oldTop, textRight, oldBottom);
+        } else {
+            int textRight = textLeft + tvCurrentTopTip.getMeasuredWidth();
+            tvCurrentTopTip.layout(textLeft, oldTop, textRight, oldBottom);
+        }
     }
 }

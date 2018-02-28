@@ -19,7 +19,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         progressView = (GuProgressBarView) findViewById(R.id.guProgressBar);
       //  progressView.setCurrentProDrawable(R.drawable.progress_view);
+
         progressView.setCurrentText("60%");
+        progressView.setCurrentTextCenter(true);
         progressView.setPercent(0.60);
     }
 
