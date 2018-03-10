@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
+import com.nanchen.compresshelper.CompressHelper;
 import com.xyc.okutils.base.ApplicationHolder;
 
 import java.io.File;
@@ -68,6 +69,15 @@ public class FileUtils {
             return mContext.getFilesDir().getPath();//直接存在/data/data里，非root手机是看不到的
         }
     }
-
+    public static File compressImg(File oldFile) {
+        long lengths = oldFile.length();
+        File newFile = null;
+        if (lengths > 2048000) {
+            newFile = CompressHelper.getDefault(ApplicationHolder.getAppContext()).compressToFile(oldFile);
+        } else {
+            newFile = oldFile;
+        }
+        return newFile;
+    }
 
 }
