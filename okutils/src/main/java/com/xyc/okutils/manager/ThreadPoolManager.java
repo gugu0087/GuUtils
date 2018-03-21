@@ -3,6 +3,7 @@ package com.xyc.okutils.manager;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -21,6 +22,7 @@ public class ThreadPoolManager {
     private ExecutorService singleThreadPool;
     private ExecutorService cachedThreadPool;
     private ExecutorService scheduledThreadPool;
+    private ScheduledExecutorService scheduledExecutorService;
 
     private ThreadPoolManager() {
         corePoolSize = Runtime.getRuntime().availableProcessors() * 2 + 1;
@@ -85,9 +87,25 @@ public class ThreadPoolManager {
      */
     public ExecutorService getScheduledThreadPool(int corePoolSize) {
         if (scheduledThreadPool == null) {
+
             scheduledThreadPool = Executors.newScheduledThreadPool(corePoolSize);
         }
+
         return scheduledThreadPool;
+    }
+
+    /**
+     * （4个里面唯一一个有延迟执行和周期重复执行的线程池）,ScheduledThreadPool主要用于执行定时任务以及有固定周期的重复任务。
+     *
+     * @param corePoolSize 核心线程数
+     * @return
+     */
+    public ScheduledExecutorService getSingleScheduledThreadPool(int corePoolSize) {
+        if (scheduledExecutorService == null) {
+            scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+        }
+
+        return scheduledExecutorService;
     }
 
     /**
