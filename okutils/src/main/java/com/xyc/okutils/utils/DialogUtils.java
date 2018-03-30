@@ -5,16 +5,22 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.xyc.okutils.R;
+import com.xyc.okutils.adapter.SpinerAdapter;
 import com.xyc.okutils.delegate.IConfirmClickListener;
 import com.xyc.okutils.delegate.IGetSelectHourListener;
+import com.xyc.okutils.delegate.SpinOnItemClickListener;
+import com.xyc.okutils.model.SpinnerSelectModel;
 
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by hasee on 2018/2/24.
@@ -146,5 +152,23 @@ public class DialogUtils {
             }
         });
 
+    }
+    public static void showSpinDailog(Context context, List<SpinnerSelectModel> list, final SpinOnItemClickListener listener){
+        final AlertDialog dialog = new AlertDialog.Builder(context).create();
+        View view = LayoutInflater.from(context).inflate(R.layout.common_popup_list_dialog, null);
+        ListView lv_pop = (ListView) view.findViewById(R.id.lv_pop);
+        dialog.setView(view);
+        SpinerAdapter adapter = new SpinerAdapter(context, list);
+        lv_pop.setAdapter(adapter);
+        lv_pop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                listener.onItemClick(position, (int) id);
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        dialog.show();
     }
 }
